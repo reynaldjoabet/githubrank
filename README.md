@@ -1,6 +1,6 @@
 # githubrank
  ## About Project
- Exposes an endpoint that returns a list of contributors sorted by the number of contributions. It makes use of GitHub REST API v3 (`https://developer.github.com/v3/`).It also handles GitHub’s API rate limit restriction using a token that can be set as an environment variable of name GH_TOKEN The endpoint is implemented with pagination in mind
+ Exposes an endpoint that returns a JSON array of contributors for a given organisation,sorted by the number of contributions. It makes use of GitHub REST API v3 (`https://developer.github.com/v3/`).It also handles GitHub’s API rate limit restriction using a token that can be set as an environment variable of name GH_TOKEN The endpoint is implemented with pagination in mind
 
 ___
 ### How to run project
@@ -30,3 +30,4 @@ ___
  - circe-generic
  - http4s-blaze-client
  - http4s-dsl
+ - logback-classic
