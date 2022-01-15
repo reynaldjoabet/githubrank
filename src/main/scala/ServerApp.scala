@@ -7,13 +7,17 @@ import scala.concurrent.duration.{Duration, DurationInt}
 
 object ServerApp extends IOApp{
 
-  val routes= Timeout(8.minutes)(GitHubRoutes.httpRoutes)
+  val routes= Timeout(15.minutes)(GitHubRoutes.httpRoutes)
+
+  val httpApp=routes.orNotFound
+  //val routes=GitHubRoutes.httpRoutes
   val server=BlazeServerBuilder[IO]
     .bindHttp(8080,"localhost")
-    .withHttpApp(routes.orNotFound)
+    .withHttpApp(httpApp)
     .resource
-    .use(_ =>IO.never)
-    .as(ExitCode.Success)
+    
+    
 
-  override def run(args: List[String]): IO[ExitCode] = server
+  override def run(args: List[String]): IO[ExitCode] = server.use(_=>IO.never)
+                                                       .as(ExitCode.Success)
 }
